@@ -19,3 +19,4 @@ When you use "npm run start:dev", it will use .env.development as main enviromen
 
 - Create tests boilerplates
 - Generate faker data on seed and on tests mocking (faker)
+- Strategy / API Bearer Auth

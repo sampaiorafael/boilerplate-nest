@@ -16,6 +16,15 @@
   - typeorm-seeds
 - Swagger
 - Docker
+
+### Features
+
+- Full module (controller, service, repository, entity, dto)
+- Configs file for Swagger
+- Configs file for Typeorm
+- Scripts for Typeorm
+- Docker postgre server
+
 ### Software rules
 
 - Only export services on modules
@@ -26,3 +35,4 @@
 - Create tests boilerplates
 - Generate faker data on seed and on tests mocking (faker)
 - Strategy / API Bearer Auth
+- Exception filter

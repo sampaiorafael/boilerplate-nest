@@ -18,7 +18,18 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
+    "typeorm:create": "DB_SCHEMA=postgres ts-node --transpile-only ./node_modules/typeorm/cli.js query --config ./src/configs/typeorm-cli.config.js \"CREATE DATABASE \\\"${DB_SCHEMA}\\\"\"",
+    "typeorm:drop": "ts-node --transpile-only ./node_modules/typeorm/cli.js schema:drop --config ./src/configs/typeorm-cli.config.js",
+    "typeorm:seed": "ts-node --transpile-only ./node_modules/typeorm-seeding/dist/cli.js seed -n ./src/configs/typeorm-cli.config.js",
+    "typeorm:migration:run": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run --config ./src/configs/typeorm-cli.config.js",
+    "typeorm:migration:revert": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:revert --config ./src/configs/typeorm-cli.config.js",
+    "typeorm:migration:generate": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:generate --config ./src/configs/typeorm-cli.config.js -n",
+    "typeorm:migration:create": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:create --config ./src/configs/typeorm-cli.config.js -n",
+    "typeorm:drop:config": "cross-env DB_SCHEMA=api ts-node --transpile-only ./node_modules/typeorm/cli.js query --config ./src/configs/typeorm-cli.config.js \"DROP TEXT SEARCH CONFIGURATION IF EXISTS gama_portuguese\"",
+    "setup:dev": "npm run typeorm:drop && npm run typeorm:drop:config && npm run typeorm:migration:run && npm run typeorm:seed",
+    "setup:dev:noseed": "npm run typeorm:drop && npm run typeorm:drop:config && npm run typeorm:migration:run"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -33,7 +44,8 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.3.0",
-    "typeorm": "^0.2.41"
+    "typeorm": "^0.2.41",
+    "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
